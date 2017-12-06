@@ -13,14 +13,15 @@ import main.btlshyp.message.AttackResponseMessage;
 import main.btlshyp.model.Ship;
 import main.btlshyp.view.View;
 import main.btlshyp.view.event.AttackListener;
+import main.btlshyp.view.event.ChatEvent;
 import main.btlshyp.view.event.ChatListener;
 import main.btlshyp.view.event.SetShipListener;
 import net.miginfocom.swing.MigLayout;
 
 public class Gui extends View {
-	private final JTextField textField_1;
+	private final JTextField textEntry;
+	JTextArea textArea;
 
-	// test commit
 	public Gui() {
 		super();
 		getContentPane().setLayout(new MigLayout("",
@@ -42,7 +43,7 @@ public class Gui extends View {
 		JCheckBox checkBox_14 = new JCheckBox("");
 		getContentPane().add(checkBox_14, "cell 6 0");
 
-		JTextArea textArea = new JTextArea();
+		textArea = new JTextArea();
 		textArea.setEditable(false);
 		getContentPane().add(textArea, "cell 12 0 1 9,grow");
 
@@ -199,9 +200,9 @@ public class Gui extends View {
 		JCheckBox checkBox_48 = new JCheckBox("");
 		getContentPane().add(checkBox_48, "cell 6 9");
 
-		textField_1 = new JTextField();
-		getContentPane().add(textField_1, "cell 12 9,growx");
-		textField_1.setColumns(10);
+		textEntry = new JTextField();
+		getContentPane().add(textEntry, "cell 12 9,growx");
+		textEntry.setColumns(10);
 
 		JButton btnNewButton = new JButton("Send");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -230,13 +231,15 @@ public class Gui extends View {
 
 	@Override
 	public void displayChat(String user, String chat) {
-		// TODO Auto-generated method stub
+		textArea.append(user + ": " + chat);
+		textArea.append("\n");
 		super.displayChat(user, chat);
 	}
 
 	@Override
 	public void displayNotification(String text) {
-		// TODO Auto-generated method stub
+		textArea.append("***" + text + "***");
+		textArea.append("\n");
 		super.displayNotification(text);
 	}
 
@@ -296,8 +299,12 @@ public class Gui extends View {
 
 	@Override
 	public void sendChat(ActionEvent e) {
-		// TODO Auto-generated method stub
-		super.sendChat(e);
+		String chat = textEntry.getText();
+		ChatEvent chatEvent = new ChatEvent(this, chat);
+		if (chatListener != null) {
+			chatListener.chatEventOccurred(chatEvent);
+		}
+		textEntry.setText("");
 	}
 
 	@Override
