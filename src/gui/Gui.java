@@ -7,8 +7,14 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
+import main.btlshyp.message.AttackResponseMessage;
+import main.btlshyp.model.Ship;
 import main.btlshyp.view.View;
+import main.btlshyp.view.event.AttackListener;
+import main.btlshyp.view.event.ChatListener;
+import main.btlshyp.view.event.SetShipListener;
 import net.miginfocom.swing.MigLayout;
 
 public class Gui extends View {
@@ -16,6 +22,7 @@ public class Gui extends View {
 
 	// test commit
 	public Gui() {
+		super();
 		getContentPane().setLayout(new MigLayout("",
 				"[8.00,grow][9.00,grow][][][][][][14.00][6.00][8.00][4.00][-27.00][160.00,grow][17.00][73.00]",
 				"[11.00,grow][29.00][][][24.00][5.00,grow][][][][]"));
@@ -145,6 +152,12 @@ public class Gui extends View {
 		getContentPane().add(checkBox_38, "cell 6 7");
 
 		JButton btnAttack = new JButton("Attack");
+		btnAttack.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sendAttack(e);
+			}
+		});
 		getContentPane().add(btnAttack, "cell 14 7,growx");
 
 		JCheckBox checkBox_39 = new JCheckBox("");
@@ -163,6 +176,12 @@ public class Gui extends View {
 		getContentPane().add(checkBox_43, "cell 6 8");
 
 		JButton btnSetShips = new JButton("Set Ships");
+		btnSetShips.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				attemptSetShip(e);
+			}
+		});
 		getContentPane().add(btnSetShips, "cell 14 8");
 
 		JCheckBox checkBox_44 = new JCheckBox("");
@@ -188,9 +207,109 @@ public class Gui extends View {
 		btnNewButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				sendChat(e);
 			}
 		});
 		getContentPane().add(btnNewButton, "cell 14 9,growx,aligny center");
 
+		setVisible(true);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
+
+	@Override
+	public void attemptSetShip(ActionEvent e) {
+		// TODO Auto-generated method stub
+		super.attemptSetShip(e);
+	}
+
+	@Override
+	public void displayAttack(AttackResponseMessage message) {
+		// TODO Auto-generated method stub
+		super.displayAttack(message);
+	}
+
+	@Override
+	public void displayChat(String user, String chat) {
+		// TODO Auto-generated method stub
+		super.displayChat(user, chat);
+	}
+
+	@Override
+	public void displayNotification(String text) {
+		// TODO Auto-generated method stub
+		super.displayNotification(text);
+	}
+
+	@Override
+	public void displayOpponentAttack(AttackResponseMessage message) {
+		// TODO Auto-generated method stub
+		super.displayOpponentAttack(message);
+	}
+
+	@Override
+	public void displayShip(Ship ship) {
+		// TODO Auto-generated method stub
+		super.displayShip(ship);
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return super.getUsername();
+	}
+
+	@Override
+	public void notYourTurn() {
+		// TODO Auto-generated method stub
+		super.notYourTurn();
+	}
+
+	@Override
+	public void registerAttackListener(AttackListener listener) {
+		// TODO Auto-generated method stub
+		super.registerAttackListener(listener);
+	}
+
+	@Override
+	public void registerChatListener(ChatListener listener) {
+		// TODO Auto-generated method stub
+		super.registerChatListener(listener);
+	}
+
+	@Override
+	public void registerSetShipListener(SetShipListener listener) {
+		// TODO Auto-generated method stub
+		super.registerSetShipListener(listener);
+	}
+
+	@Override
+	public void resetGame() {
+		// TODO Auto-generated method stub
+		super.resetGame();
+	}
+
+	@Override
+	public void sendAttack(ActionEvent e) {
+		// TODO Auto-generated method stub
+		super.sendAttack(e);
+	}
+
+	@Override
+	public void sendChat(ActionEvent e) {
+		// TODO Auto-generated method stub
+		super.sendChat(e);
+	}
+
+	@Override
+	public void setShip(Ship ship) {
+		// TODO Auto-generated method stub
+		super.setShip(ship);
+	}
+
+	@Override
+	public void yourTurn() {
+		// TODO Auto-generated method stub
+		super.yourTurn();
+	}
+
 }
