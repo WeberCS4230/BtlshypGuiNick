@@ -44,6 +44,7 @@ public class Gui extends View {
 	ArrayList<Coordinate> yourCoord;
 	ArrayList<Coordinate> oppCoord;
 	Coordinate attackCoor;
+	JScrollBar vertical;
 
 	public Gui() {
 		super();
@@ -304,6 +305,7 @@ public class Gui extends View {
 		txtArea.setLineWrap(true);
 		scrollPane = new JScrollPane(txtArea);
 		getContentPane().add(scrollPane, "cell 12 0 1 10,grow");
+		vertical = scrollPane.getVerticalScrollBar();
 
 		btnAttack = new JButton("Attack");
 		btnAttack.addActionListener(new ActionListener() {
@@ -344,8 +346,6 @@ public class Gui extends View {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					String entry = textEntry.getText();
 					txtArea.append(username + ": " + entry + "\n");
-
-					JScrollBar vertical = scrollPane.getVerticalScrollBar();
 					vertical.setValue(vertical.getMaximum());
 
 					textEntry.setText("");
@@ -381,6 +381,7 @@ public class Gui extends View {
 			oppCoorMap.get(message.getCoordinate()).setBackground(Color.RED);
 		} else {
 			oppCoorMap.get(message.getCoordinate()).setBackground(Color.WHITE);
+			vertical.setValue(vertical.getMaximum());
 		}
 	}
 
@@ -394,6 +395,7 @@ public class Gui extends View {
 	@Override
 	public void displayNotification(String text) {
 		txtArea.append("***" + text + "*** \n");
+		vertical.setValue(vertical.getMaximum());
 	}
 
 	@Override
@@ -401,6 +403,7 @@ public class Gui extends View {
 		txtArea.append("Opponent fired a " + message.getHitOrMiss().toString() + " at ("
 				+ String.valueOf(message.getCoordinate().x) + ", " + String.valueOf(message.getCoordinate().y) + ")\n");
 		yourCoorMap.get(message.getCoordinate()).setBackground(Color.RED);
+		vertical.setValue(vertical.getMaximum());
 	}
 
 	@Override
