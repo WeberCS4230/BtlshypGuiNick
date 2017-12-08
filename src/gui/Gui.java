@@ -386,16 +386,14 @@ public class Gui extends View {
 
 	@Override
 	public void displayChat(String user, String chat) {
-		txtArea.append(user + ": " + chat);
-		txtArea.append("\n");
+		txtArea.append(user + ": " + chat + "\n");
 		JScrollBar vertical = scrollPane.getVerticalScrollBar();
 		vertical.setValue(vertical.getMaximum());
 	}
 
 	@Override
 	public void displayNotification(String text) {
-		txtArea.append("***" + text + "***");
-		txtArea.append("\n");
+		txtArea.append("***" + text + "*** \n");
 	}
 
 	@Override
