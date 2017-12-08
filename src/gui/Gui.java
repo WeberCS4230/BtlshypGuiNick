@@ -49,8 +49,8 @@ public class Gui extends View {
 		super();
 		setSize(new Dimension(500, 320));
 		getContentPane().setLayout(new MigLayout("fill",
-				"[8.00,grow][9.00,grow][grow][][][][][14.00][6.00][8.00][4.00][-27.00][160.00,grow][17.00][73.00]",
-				"[11.00,grow][29.00][][][32.00][50.00,grow][5.00,grow][][][][]"));
+				"[8.00,grow][9.00,grow][][][][][][14.00][6.00][8.00][4.00][-27.00][160.00,grow][17.00][73.00]",
+				"[11.00][29.00][][][32.00][50.00,grow][5.00][][][][]"));
 
 		newShipCoor = new ArrayList<Coordinate>();
 		yourCoorMap = new HashMap<Coordinate, JCheckBox>();
@@ -376,7 +376,7 @@ public class Gui extends View {
 	@Override
 	public void displayAttack(AttackResponseMessage message) {
 		txtArea.append("Your attack was a " + message.getHitOrMiss().toString() + " at ("
-				+ String.valueOf(message.getCoordinate().x) + ", " + String.valueOf(message.getCoordinate().y) + ")");
+				+ String.valueOf(message.getCoordinate().x) + ", " + String.valueOf(message.getCoordinate().y) + ")\n");
 		if (message.getHitOrMiss() == HitOrMiss.HIT) {
 			oppCoorMap.get(message.getCoordinate()).setBackground(Color.RED);
 		} else {
@@ -399,7 +399,7 @@ public class Gui extends View {
 	@Override
 	public void displayOpponentAttack(AttackResponseMessage message) {
 		txtArea.append("Opponent fired a " + message.getHitOrMiss().toString() + " at ("
-				+ String.valueOf(message.getCoordinate().x) + ", " + String.valueOf(message.getCoordinate().y) + ")");
+				+ String.valueOf(message.getCoordinate().x) + ", " + String.valueOf(message.getCoordinate().y) + ")\n");
 		yourCoorMap.get(message.getCoordinate()).setBackground(Color.RED);
 	}
 
@@ -417,7 +417,7 @@ public class Gui extends View {
 
 	@Override
 	public void notYourTurn() {
-		txtArea.append("Waiting on opponent...");
+		txtArea.append("Waiting on opponent...\n");
 		try {
 			Thread.sleep(1500);
 		} catch (InterruptedException e) {
@@ -485,13 +485,14 @@ public class Gui extends View {
 
 	@Override
 	public void setShip(Ship ship) {
-		txtArea.append("Please choose " + ship.getShipSize() + " spaces to place your " + ship.getShipType().toString());
+		txtArea.append(
+				"Please choose " + ship.getShipSize() + " spaces to place your " + ship.getShipType().toString() + "\n");
 		shipToPlace = ship;
 	}
 
 	@Override
 	public void yourTurn() {
-		txtArea.append("It is your turn...");
+		txtArea.append("It is your turn...\n");
 		btnAttack.setEnabled(true);
 	}
 
